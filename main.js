@@ -11,18 +11,48 @@ function defineGridSize() {
     let i;
 
     while (isNaN(i)) {
-        i = prompt('define the grid size: enter the number up to 100', 16);
+        i = prompt('define the grid size: enter the number up to 100', randomGridSize());
 
         if (!isNaN(i)) {
             if (i > 100) {
-                i = 100;
-                return i;
+                return i = 100;
+            } else if (i < 0) {
+                i *= -1;
+                if (i > 100) {
+                    return i = 100;
+                } else {
+                    return i;
+                }
+            } else if (!Number.isInteger(Number(i))) {
+                if (i > 100) {
+                    return i = 100;
+                } else {
+                    return Math.round(i);
+                }
+            } else if (i == 0) {
+                return i += 1;
+                // not good!
+            } else if (i === null) {
+                console.log('check');
+                const message = document.querySelector('#message');
+                message.textContent = 'Creation of the new grid was canceled by the user. Return to default values. To create a new grid click on the orange button.';
+                message.style.display = 'block';
+                
+                return i = 16;
             } else {
                 return i;
             }
         }
     }
 }
+
+function randomGridSize() {
+    let range = 100;
+    let randomNumber = Math.floor( Math.random() * range / 2 ) * 2;
+    return randomNumber;
+}
+
+console.log(randomGridSize());
 
 let num = defineGridSize();
 
@@ -49,22 +79,34 @@ function createGrid() {
 
 createGrid();
 
-// draw version: creates new grids, but it's not what i need.
-// const button = document.querySelector('button');
-// button.addEventListener('click', createGrid);
-
 cellArray.forEach((cell) => {
     cell.addEventListener('mouseover', hoverState);
 });
+
+console.log(cellArray.length);
 
 function hoverState(event) {
     event.target.classList.add('cell_filled');
 }
 
-// information about the size of the grid
+
+// information for user about the size of the grid
 const gridSizeInfo = document.querySelector('#current-size');
 gridSizeInfo.textContent = `current size of the grid: ${num} x ${num}`;
 if (`${num}` == 100) {
     gridSizeInfo.textContent = `the maximum size ${num} x ${num} is reached.`;
-}
+} 
+
+// button 
+
+const button = document.querySelector('button');
+
+// remove grid
+
+button.addEventListener('click', () => {
+    while (grid.firstChild) {
+        grid.firstChild.remove();
+    }
+});
+
 

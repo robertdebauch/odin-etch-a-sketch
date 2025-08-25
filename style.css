@@ -56,8 +56,8 @@ section#about>#name {
     padding: 1rem;
 }
 
-#name > h1 {
-   font-size: 3rem;
+#name>h1 {
+    font-size: 3rem;
 }
 
 section#about>#description {
@@ -69,8 +69,23 @@ section#about>#description {
     /* max-width: 60%;  */
 }
 
-div#information>#current-size {
+div#messages {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 1rem;
+}
+
+div#messages>#current-size {
     font-size: 1.5rem;
+    font-weight: 900;
+}
+
+div#messages>#message {
+    display: none;
+    font-size: 1.25rem;
+    padding: 1rem 0.5rem 1rem 1rem;
+    border-left: 0.25rem solid red;
+    background-color: rgb(60, 0, 0);
 }
 
 /* div 'grid' */

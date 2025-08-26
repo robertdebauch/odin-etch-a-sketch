@@ -43,6 +43,7 @@ function createGrid() {
     if (`${num}` == 100) {
         gridSizeInfo.textContent = `the maximum size ${num} x ${num} is reached.`;
     }
+    console.log(cellArray.length);
 }
 
 createGrid();
@@ -72,36 +73,26 @@ function defineGridSize() {
 
         if (!isNaN(i)) {
             if (i > 100) {
-                return i = 100;
+                i = 100;
             } else if (i < 0) {
                 i *= -1;
-                if (i > 100) {
-                    return i = 100;
-                } else {
-                    return i;
-                }
             } else if (!Number.isInteger(Number(i))) {
-                if (i > 100) {
-                    return i = 100;
-                } else {
-                    return Math.round(i);
-                }
-            } else if (i == 0) {
-                return i += 1;
-                // not good!
-            } else if (i === null) {
-                console.log('check');
+                i = Math.round(i);
+            } else if (i === null || i == 0) {
                 const message = document.querySelector('#message');
                 message.textContent = 'Creation of the new grid was canceled by the user. Return to default values. To create a new grid click on the orange button.';
                 message.style.display = 'block';
-
-                return i = 16;
+                i = 16;
             } else {
-                return i;
             }
         }
+        
     }
+    
+    return i;
 }
+
+
 
 
 

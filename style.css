@@ -98,6 +98,7 @@ div#grid {
     flex-flow: row wrap;
     justify-content: flex-start;
     align-items: stretch;
+    gap: 1px;
 }
 
 .cell {
@@ -107,7 +108,6 @@ div#grid {
 
 .cell_filled {
     background-color: black;
-    /* border: 1px solid #0048ff; */
 }
 
 /* button */

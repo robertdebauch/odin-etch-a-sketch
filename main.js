@@ -13,7 +13,8 @@ function deleteGrid() {
 
 function createGrid(num) {
     let gridArea = 768;
-    let cellSize = gridArea / num;
+    let gridGap = 1;
+    let cellSize = (gridArea - gridGap * (num - 1)) / num;
     let numOfCells = Math.pow(num, 2);
     let cellArray = [];
 
@@ -21,7 +22,8 @@ function createGrid(num) {
         let cell = document.createElement('div');
         cell.setAttribute('class', 'cell');
         grid.appendChild(cell);
-        cell.setAttribute(`style`, `width: ${cellSize}px; height: ${cellSize}px;`);
+        cell.style.width = `${cellSize}px`;
+        cell.style.height = `${cellSize}px`;
         cellArray.push(cell);
     }
 

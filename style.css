@@ -84,8 +84,8 @@ div#messages>#message {
     display: none;
     font-size: 1.25rem;
     padding: 1rem 0.5rem 1rem 1rem;
-    border-left: 0.25rem solid red;
-    background-color: rgb(60, 0, 0);
+    border-left: 0.25rem solid rgb(38, 66, 94);
+    background-color: rgb(19, 33, 48);
 }
 
 /* div 'grid' */
@@ -113,12 +113,13 @@ div#grid {
 /* button */
 
 button#create-grid {
-    background-color: #f54000;
+    background-color: #3500f5;
     font-size: 1.5rem;
     color: white;
     font-weight: 900;
     padding: 1rem 2rem;
     border: none;
+    border-radius: 12rem;
 }
 
 /* footer */

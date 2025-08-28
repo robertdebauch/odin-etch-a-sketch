@@ -1,21 +1,17 @@
-// define grid
-
 const grid = document.querySelector('#grid');
+const button = document.querySelector('button');
 
-let num = randomGridSize();
+function randomGridSize(min = 1, max = 100) {
+    return Math.floor(Math.random() * (max - min + 1) + min);
+}
 
-function randomGridSize() {
-    let range = 100;
-    let randomNumber = Math.floor(Math.random() * range / 2) * 2;
-    if (randomNumber == 0) {
-        console.log(randomNumber);
-        return randomNumber += 1;
-    } else {
-        return randomNumber;
+function deleteGrid() {
+    while (grid.firstChild) {
+        grid.firstChild.remove();
     }
 }
 
-function createGrid() {
+function createGrid(num) {
     let gridArea = 768;
     let cellSize = gridArea / num;
     let numOfCells = Math.pow(num, 2);
@@ -40,59 +36,55 @@ function createGrid() {
 
     let gridSizeInfo = document.querySelector('#current-size');
     gridSizeInfo.textContent = `current size of the grid: ${num} x ${num}`;
-    if (`${num}` == 100) {
-        gridSizeInfo.textContent = `the maximum size ${num} x ${num} is reached.`;
-    }
     console.log(cellArray.length);
 }
 
-createGrid();
-
-
-const button = document.querySelector('button');
-
-button.addEventListener('click', () => {
-
-    function deleteGrid() {
-        while (grid.firstChild) {
-            grid.firstChild.remove();
-        }
-    }
-
-    deleteGrid();
-
-    num = defineGridSize();
-    createGrid();
-});
-
 function defineGridSize() {
-    let i;
+    const message = document.querySelector('#message');
+    message.style.display = 'none';
 
-    while (isNaN(i)) {
-        i = prompt('define the grid size: enter the number up to 100', randomGridSize());
+    while (true) {
+        const initialValue = prompt('define the grid size: enter the number up to 100', randomGridSize());
 
-        if (!isNaN(i)) {
-            if (i > 100) {
-                i = 100;
-            } else if (i < 0) {
-                i *= -1;
-            } else if (!Number.isInteger(Number(i))) {
-                i = Math.round(i);
-            } else if (i === null || i == 0) {
-                const message = document.querySelector('#message');
-                message.textContent = 'Creation of the new grid was canceled by the user. Return to default values. To create a new grid click on the orange button.';
-                message.style.display = 'block';
-                i = 16;
-            } else {
-            }
+        if (initialValue === null) {
+            message.textContent = 'You have cancelled the grid creation. The grid has been reset to its default state.';
+            message.style.display = 'block';
+            return 16;
         }
-        
+
+        const trimmedValue = initialValue.trim();
+        let i = parseInt(trimmedValue, 10);
+
+        if (isNaN(i)) {
+            continue;
+        }
+
+        if (i == 0) {
+            message.textContent = 'You entered 0. The grid has been reset to its default state.';
+            message.style.display = 'block';
+            i = 16;
+        }
+
+        if (i < 0) {
+            message.textContent = 'You entered a negative value. It has been changed to positive.';
+            message.style.display = 'block';
+            i *= -1;
+        }
+
+        if (i > 100) {
+            message.textContent = 'You entered a value that is too large. It has been truncated to 100.';
+            message.style.display = 'block';
+            i = 100;
+        }
+
+        return i;
     }
-    
-    return i;
 }
 
 
+button.addEventListener('click', () => {
+    deleteGrid();
+    createGrid(defineGridSize());
+});
 
-
-
+createGrid(randomGridSize());

@@ -30,6 +30,10 @@ function createGrid(num) {
     const randomColor = (event) => {
         const randColor = Math.floor(Math.random() * 16777215).toString(16);
         event.target.style.backgroundColor = "#" + randColor;
+
+        let opacity = parseFloat(event.target.style.opacity) || 0;
+        opacity = Math.min(opacity + 0.1, 1);
+        event.target.style.opacity = opacity;
     }
 
     cellArray.forEach((cell) => {

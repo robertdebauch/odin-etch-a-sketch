@@ -42,7 +42,6 @@ function createGrid(num) {
 
     let gridSizeInfo = document.querySelector('#current-size');
     gridSizeInfo.textContent = `current size of the grid: ${num} x ${num}`;
-    console.log(cellArray.length);
 }
 
 function defineGridSize() {

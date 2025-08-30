@@ -41,7 +41,7 @@ function createGrid(num) {
     });
 
     let gridSizeInfo = document.querySelector('#current-size');
-    gridSizeInfo.textContent = `current size of the grid: ${num} x ${num}`;
+    gridSizeInfo.textContent = `${num} x ${num}` + " squares";
 }
 
 function defineGridSize() {
